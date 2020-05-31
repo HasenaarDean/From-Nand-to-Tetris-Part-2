@@ -1,0 +1,19 @@
+dodmoshe
+Jonathan Meerson - 315363838 - jonathan.meerson@mail.huji.ac.il
+
+~Nand2Tetris EX9~
+
+~Files submitted~
+README- this file
+Point.jack - A simple point class.
+Snek.jack - the snake doing all the snaking.
+SnekGame.jack - game manager.
+Main.jack - create a game and runs it.
+
+
+
+~Remarks~
+Implemented the snake with an array of points each changing when the snake moves. When the
+snake eats a new point is added to the array as his tail.
+Play to 5 eatings. Don't hit the walls.
+You can try hit yourself.

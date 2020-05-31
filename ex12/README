@@ -1,0 +1,20 @@
+dodmoshe
+Jonathan Meerson - 315363838 - jonathan.meerson@mail.huji.ac.il
+
+~Nand2Tetris EX12~
+
+~Files submitted~
+README - This file
+Array.jack - OS's array class
+Math.jack - OS's math class 
+Output.jack - OS's output class
+Screen.jack - OS's screen class
+Sys.jack - OS's sys class
+Keyboard.jack - OS's keyboard class
+Memory.jack - OS's memory class
+String.jack - OS's string class
+
+
+~Remarks~
+Pretty match straight forward from the book's algorithms.
+In the memory class I implemented a best-fit algorithm

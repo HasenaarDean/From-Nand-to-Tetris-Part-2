@@ -1,0 +1,126 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * Memory operations library.
+ */ 
+class Memory {
+
+	static Array memory;
+	static Array freeBlocksList;
+	
+	static int heapBase, heapEnd;
+	
+	static int nextSeg; // next segment in the blocks list
+
+    /** Initializes memory parameters. */
+    function void init() {
+		let memory = 0;
+		
+		let heapBase = 2048;
+		let heapEnd = 16384;
+		
+		let freeBlocksList = 0;
+		let freeBlocksList[2048] = heapEnd - heapBase - 1;   //length of the segment
+		let freeBlocksList[2049] = -1;
+		
+		return;
+    }
+
+    /** Returns the value of the main memory at the given address. */
+    function int peek(int address)
+	{
+		return memory[address];
+    }
+
+    /** Sets the value of the main memory at this address
+     *  to the given value. */
+    function void poke(int address, int value)
+	{
+		let memory[address] = value;
+		return;
+    }
+
+    /** finds and allocates from the heap a memory block of the 
+     *  specified size and returns a reference to its base address. */
+    function int alloc(int size) 
+	{
+		var int match, matchIndex, temp;
+		let match = Memory.getBestFit(size);
+		let matchIndex = freeBlocksList[match];
+		
+		if (match = heapBase )
+		{
+			let matchIndex = heapBase;
+		}
+		
+		if (freeBlocksList[matchIndex] = (size + 1))
+		{
+			let freeBlocksList[match] = freeBlocksList[matchIndex + 1];
+			let freeBlocksList[matchIndex] = size;
+			return matchIndex +1;
+		}
+		else
+		{
+			let freeBlocksList[matchIndex + freeBlocksList[matchIndex] - size] = size;
+			let temp = freeBlocksList[matchIndex];
+			let freeBlocksList[matchIndex] = (freeBlocksList[matchIndex] - size -1);
+			return matchIndex + temp - size +1;
+		}
+		
+    }
+
+    /** De-allocates the given object and frees its space. */
+    function void deAlloc(int object) {
+		var int size, lastAlloc;
+		
+		let size = freeBlocksList[object - 1];
+		let lastAlloc = Memory.findLastAlloc();
+		let freeBlocksList[object - 1] = size;
+		let freeBlocksList[lastAlloc + 1] = object - 1;
+		let freeBlocksList[object] = -1;
+		return;
+    }    
+	
+	function int getBestFit(int size)
+	{
+		var int index, match, bestMatch;
+	    let index = heapBase;
+		let match = index;
+		let bestMatch = match;
+		
+		while (~(freeBlocksList[index  + 1] = -1))
+		{
+			if( freeBlocksList[index] > size)
+			{
+				if(bestMatch > match)
+				{
+					let bestMatch = match;
+				}
+			}
+			
+			let match = index + 1;
+			let index = freeBlocksList[index + 1];
+		}
+		
+		return bestMatch;
+	}
+	
+	function int findLastAlloc()
+	{
+		var int index;
+		let index = heapBase;
+		while (true)
+		{
+			if (freeBlocksList[index +1] = -1)
+			{
+				return index;
+			}
+			let index = freeBlocksList[index +1];
+		}
+		return -1;
+	}
+	
+}

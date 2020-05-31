@@ -1,0 +1,71 @@
+class Point
+{
+	field int x, y;
+	
+	constructor Point new(int newX, int newY)
+	{
+		let x = newX;
+		let y = newY;
+		
+		return this;
+	}
+	
+	constructor Point newByPoint(Point p)
+	{
+		let x = p.getX();
+		let y = p.getY();
+		
+		return this;
+	}
+	
+	method void dispose()
+	{
+		do Memory.deAlloc(this);
+	
+		return;
+	}
+	
+	method int getX()
+	{
+		return x;
+	}
+	
+		method int getY()
+	{
+		return y;
+	}
+	
+	method void setX(int newX)
+	{
+		let x = newX;
+		return;
+	}
+	
+	method void setY(int newY)
+	{
+		let y = newY;
+		return;
+	}
+	
+	method boolean equal(Point other)
+	{
+		if ((x = other.getX()) & (y = other.getY()))
+		{
+			return true;
+		}
+		return false;
+	
+	}
+	
+	method void print()
+	{
+		do Output.printString("[");
+		do Output.printInt(x);
+		do Output.printString(",");
+		do Output.printInt(y);
+		do Output.printString("]");
+		do Sys.wait(3000);
+		return;
+	}
+	
+}

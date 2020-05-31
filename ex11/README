@@ -1,0 +1,26 @@
+dodmoshe
+Jonathan Meerson - 315363838 - jonathan.meerson@mail.huji.ac.il
+
+~Nand2Tetris Ex11~
+
+~Files submitted~
+README - this file.
+Makefile - compilation file 
+Tokenizer.java - Translates jack file code to its tokens.
+JackCompiler.java - Main class compiling jack files from source.
+CompilationEngine.java - creates an xml file from a tokenizer using the jack grammar.
+XmlWriter.java - writes to xml file.
+VmWriter.java - writes to vm file.
+JackCompiler - Run file.
+
+
+
+~Remarks~
+Just extended the compilation engine to also write to a vm file the correct commmands
+using a class VmWriter. Also created SymbolTable class which saves variables and thier 
+indeces throghout the execution.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Please notice I submitted project 10 with Dean Hasenaar but not project 11, so our 
+Tokenizer and CompilationEngine might be similiar. This is not us copying from each other.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,25 @@
+dodmoshe,hasenaar
+Jonathan Meerson - 315363838 - jonathan.meerson@mail.huji.ac.il
+Dean Hasenaar - 313584401 - dean.hasenaar@mail.huji.ac.il
+
+~Nand2Tetris Ex10~
+
+~Files submitted~
+README - this file.
+Makefile - compilation file 
+Tokenizer.java - Translates jack file code to its tokens.
+JackAnalyzer.java - Main class compiling jack files from source.
+CompilationEngine.java - creates an xml file from a tokenizer using the jack grammar.
+JackAnalyzer - Run file.
+
+
+~Remarks~
+In order to implement the Tokenizer we used Regex patterns to distinguish between keywords, symbols, integerConstants,
+stringConstants and identifiers. At first we removed all comment lines (and inner comments), also by using Regex
+patterns, and then implemented the token rail with a an ArrayList.
+We also expanded the tokenizer with a 'reverse' method for later-on checking inside the compilation engine itself.
+The compilation engine is triggered with the CompileClass method which compiles the variables declarations and
+the subroutines. All the methods are being called according to the grammar and the xml file is written in the course of
+its running via another class we written - the XmlWriter which also deals with indentation (which is not needed for this
+exercise). We didn't use an external XML package because we used our custom class for debugging which was really needed
+for this one.

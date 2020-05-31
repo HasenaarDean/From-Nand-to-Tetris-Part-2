@@ -1,0 +1,24 @@
+dodmoshe,hasenaar
+Jonathan Meerson - 315363838 - jonathan.meerson@mail.huji.ac.il
+Dean Hasenaar - 313584401 - dean.hasenaar@mail.huji.ac.il
+
+~Nand2Tetris Ex8~
+
+~Files submitted~
+REANME - this file. 
+arithmeticLibrary - folder containing the arithemtic and boolean operations asm code
+popLibrary - folder containing the pop asm code
+pushLibrary - folder containing the push asm code
+branchingLibrary - folder containing all asm code releavant to loops and ifs
+functionOperationLibrary - folder containing all asm code releavant to function calling, declaring 
+                           and return statements
+Makefile - compilation file 
+VmParser.java - Translates vm lines to asm lines
+VMtranslator.java - Main class. Reads from vm files and sends them to the parser
+VMtranslator
+
+
+
+~Remarks~
+Our overall design of the project was reading from pre-prepeared asm files when parsing a line
+from the vm file.

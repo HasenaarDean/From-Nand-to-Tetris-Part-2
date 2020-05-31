@@ -1,0 +1,15 @@
+class Main
+{
+	function void main() 
+	{
+		var SnekGame snekGame;
+		let snekGame = SnekGame.new();
+		
+		do snekGame.run();
+		
+		
+		do snekGame.dispose();
+		
+		return;
+	}
+}

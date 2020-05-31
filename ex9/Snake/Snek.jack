@@ -1,0 +1,197 @@
+class Snek{
+	
+	field int size, currentDirection;
+	field Array snekBody;
+	
+	constructor Snek new() 
+	{
+		let snekBody = Array.new(10); // body max size is 20
+		let size = 4; // current size is 4
+		let currentDirection = 4;
+		
+		let snekBody[0] = Point.new(33,32);
+		let snekBody[1] = Point.new(38,32);
+		let snekBody[2] = Point.new(38,37);
+		let snekBody[3] = Point.new(38,42);
+		
+		do draw();
+		
+		
+        return this;
+    }
+    
+    method int getSize()
+    {
+    	return size;
+    }
+	
+	method void dispose()
+	{
+		var int index;
+		var Point currentBodyPart;
+		
+		let index = 0;
+		
+		while ( index < size)
+		{
+			let currentBodyPart = snekBody[index];
+			do currentBodyPart.dispose();
+			let index = index + 1;
+		}
+		
+		do snekBody.dispose(); // ):
+		do Memory.deAlloc(this);
+		
+		return;
+	}
+	
+	method Point getHead() // heh
+	{
+		return snekBody[0];
+	}
+	
+	method void draw()
+	{
+		var int index;
+		var Point currentBodyPart;
+		let index = 0;
+		
+		while (index < size)
+		{
+		
+			let currentBodyPart = snekBody[index];
+			do Screen.drawRectangle(currentBodyPart.getX(), currentBodyPart.getY(),
+								    currentBodyPart.getX() + 4, currentBodyPart.getY() + 4);
+			
+			let index = index + 1;
+		}
+		
+		
+		return;
+	}
+	
+	method void move(int direction)
+	{
+		var Point snekHead, toDispose, newBodyPart;
+		var int newHeadX, newHeadY, counter;
+		var Array newBody;
+
+		let snekHead = Point.newByPoint(snekBody[0]);
+		let newHeadX = snekHead.getX();
+		let newHeadY = snekHead.getY();
+		
+		// cant go opposite directions
+		if ((direction + currentDirection = 4) | (direction + currentDirection = 6))
+		{
+			let direction = currentDirection;
+		}
+		
+			
+		if (direction = 1) // up
+		{
+			let newHeadY = newHeadY - 4;
+		}
+		if ( direction = 2) // right
+		{
+			let newHeadX = newHeadX + 4;
+		}
+		if ( direction = 3) // down
+		{
+			let newHeadY = newHeadY + 4;
+		}
+		if ( direction = 4) // left
+		{
+			let newHeadX = newHeadX - 4;
+		}
+
+        if(Snek.isWallCollision(newHeadX, newHeadY))
+        {
+			do Output.moveCursor(10, 10);
+			do Output.printString("FAIL");
+			do dispose();
+			do Sys.halt();	
+        }
+		
+		let counter = size - 1;
+		
+		let newBody = Array.new(10);
+		
+		
+	
+		while (~(counter = 0))
+		{
+			let newBodyPart = snekBody[counter - 1];
+			let newBody[counter] = Point.newByPoint(newBodyPart);
+		
+			let counter = counter - 1;
+		}
+		do snekHead.setX(newHeadX); do snekHead.setY(newHeadY);
+		let newBody[0] = snekHead;
+		
+		let counter = 0;
+		
+		while(counter < size)
+		{
+			let toDispose = snekBody[counter]; // old tail
+			do toDispose.dispose();
+			let counter = counter + 1;
+		}
+		
+	    let snekBody = newBody;
+		
+		do draw();
+		
+		let currentDirection = direction;
+		return;
+	}
+	
+	method void grow()
+	{
+		var int newTailX, newTailY;
+		var Point snekTail;
+		if(size = 8)
+		{  
+            do Screen.clearScreen();
+			do Output.moveCursor(10, 10);
+			do Output.printString("WIN");
+			do dispose();
+			do Sys.halt();	
+		}
+		
+		let snekTail = snekBody[size - 1];
+		let newTailX = snekTail.getX();
+		let newTailY = snekTail.getY();
+		
+		if (currentDirection = 1) // up
+		{
+			let newTailY = newTailY + 4;
+		}
+		if ( currentDirection = 2) // right
+		{
+			let newTailX = newTailX - 4;
+		}
+		if ( currentDirection = 3) // down
+		{
+			let newTailY = newTailY - 4;
+		}
+		if ( currentDirection = 4) // left
+		{
+			let newTailX = newTailX + 4;
+		}
+		
+		let snekBody[size] = Point.new(newTailX, newTailY);
+		
+		let size = size + 1;
+		
+		return;
+	}
+	
+	
+    function boolean isWallCollision(int x, int y)
+    {
+        return (y > 256) | (y < 0 ) | (x < 1) | (x > 508);
+    }
+
+	
+
+}

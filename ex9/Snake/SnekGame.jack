@@ -1,0 +1,113 @@
+class SnekGame
+{
+	field Snek snek;
+	field int direction, yumCounter;
+	field Array yums;
+	
+	constructor SnekGame new()
+	{
+		var Point food;
+		let snek = Snek.new();
+		let yums = Array.new(10);
+		
+		let yumCounter = 0;
+		let yums[0] = Point.new(60,60);
+		let yums[1] = Point.new(100,100);
+		let yums[2] = Point.new(100,5);
+		let yums[3] = Point.new(70,200);
+		let yums[4] = Point.new(50,50);
+		
+		return this;
+	}
+	
+	method void dispose()
+	{
+		do snek.dispose();
+		
+		return;
+		
+	}
+	
+	method void run() {
+        var char key;
+
+		let direction = 4;
+
+        while (true) {
+            while (key = 0) {
+                let key = Keyboard.keyPressed();
+                do moveSnek(direction);
+            }
+   
+
+			if (key  = 131) // up
+			{
+				let direction = 1;
+			}
+			if (key  = 132) // right
+			{
+				let direction = 2;
+			}
+			if (key  = 133) // down
+			{
+				let direction = 3;
+			}
+			if (key  = 130) // left
+			{
+				let direction = 4;
+			}
+
+
+            while (~(key = 0)) {
+                let key = Keyboard.keyPressed();
+                do moveSnek(direction);
+            }
+        }
+
+        return;
+	}
+	
+	method void moveSnek(int direction)
+	{
+		var Point head, food;
+		do Screen.clearScreen();
+		
+		do printScore();
+		
+		let food = yums[yumCounter];
+		do Screen.drawRectangle(food.getX(), food.getY(),
+								    food.getX() + 4, food.getY() + 4);
+		
+		do snek.move(direction);
+		
+		do Sys.wait(75);
+		
+		let head = snek.getHead();
+		let food = yums[yumCounter];
+		
+		if((Math.abs(food.getX() - head.getX()) < 4) & 
+		   (Math.abs(food.getY() - head.getY()) < 4))
+		{
+			do snek.grow();
+			let yumCounter = yumCounter + 1;
+			
+			let food = yums[yumCounter];
+			
+			do Screen.drawRectangle(food.getX(), food.getY(),
+								    food.getX() + 4, food.getY() + 4);
+		}	
+		
+		return;
+	}
+	
+	method void printScore()
+	{
+		do Output.moveCursor(0, 0);
+		do Output.printString("  SCORE : ");
+		do Output.printInt(snek.getSize() - 4);
+		do Output.printString(" / ");
+		do Output.printInt(5);
+		return;
+	}
+	
+}

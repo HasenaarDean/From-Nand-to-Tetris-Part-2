@@ -1,0 +1,17 @@
+@SP
+A=M
+A=A-1
+D=M
+@SP
+M=M-1
+@R13
+M=D
+@STATIC_ADDRESS
+D=A
+@R14
+M=D
+@R13
+D=M
+@R14
+A=M
+M=D
